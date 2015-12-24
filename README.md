@@ -1,6 +1,6 @@
-# hackdfw-backend
+# waterview
 
-The backend to HackDFW.
+Hackathon management system written in Node.js.
 
 ## License
 
