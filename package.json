@@ -1,0 +1,28 @@
+{
+  "name": "waterview",
+  "version": "0.1.0",
+  "description": "Hackathon management system written in Node.js.",
+  "main": "lib/app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackdfw/waterview.git"
+  },
+  "keywords": [
+    "hackathon",
+    "management",
+    "system",
+    "platform"
+  ],
+  "author": "Ian Macalinao <me@ian.pw>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hackdfw/waterview/issues"
+  },
+  "homepage": "https://github.com/hackdfw/waterview#readme"
+}
