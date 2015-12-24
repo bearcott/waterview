@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "start": "node lib/app",
     "test": "mocha -R spec"
   },
   "repository": {
