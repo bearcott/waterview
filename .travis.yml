@@ -2,3 +2,12 @@ language: node_js
 node_js:
   - 4
   - 5
+sudo: required
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+addons:
+  postgresql: 9.4
+services:
+  - postgresql
+env:
+  - DATABASE_URL=postgres://postgres@localhost/travis_ci_test
