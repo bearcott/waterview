@@ -21,11 +21,6 @@ module.exports = database.define('user', {
     field: 'confirmed_at'
   },
 
-  createdAt: {
-    type: Sequelize.DATE,
-    field: 'created_at'
-  },
-
   profile: {
     type: Sequelize.JSONB
   }
