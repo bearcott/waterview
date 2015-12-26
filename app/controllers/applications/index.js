@@ -12,6 +12,7 @@ const _ = require('koa-route')
 
 const routes = router => {
   router.post('/applications', actions.create)
+  router.get('/applications/:id', actions.show)
   router.put('/applications/:id', actions.update)
   router.patch('/applications/:id', actions.update)
 }
