@@ -28,7 +28,9 @@
   "homepage": "https://github.com/hackdfw/waterview#readme",
   "devDependencies": {
     "chai": "^3.4.1",
-    "mocha": "^2.3.4"
+    "co-mocha": "^1.1.2",
+    "mocha": "^2.3.4",
+    "supertest": "^1.1.0"
   },
   "dependencies": {
     "co": "^4.6.0",
