@@ -8,13 +8,15 @@ const middlewares = {
   find: require('./middlewares/find')
 }
 
-const _ = require('koa-route')
+const Router = require('koa-router')
 
 const routes = router => {
-  router.post('/applications', actions.create)
-  router.get('/applications/:id', actions.show)
-  router.put('/applications/:id', actions.update)
-  router.patch('/applications/:id', actions.update)
+  const users = new Router()
+  users.post('/', actions.create)
+  users.get('/:id', actions.show)
+  users.put('/:id', actions.update)
+  users.patch('/:id', actions.update)
+  router.use('/users', users.routes(), users.allowedMethods())
 }
 
 module.exports = {
