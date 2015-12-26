@@ -4,7 +4,9 @@ const database = require('../../lib/database')
 module.exports = database.define('user', {
 
   email: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true
   },
 
   password: {
@@ -12,17 +14,16 @@ module.exports = database.define('user', {
   },
 
   confirmationToken: {
-    type: Sequelize.STRING,
-    field: 'confirmation_token'
+    type: Sequelize.STRING
   },
 
   confirmedAt: {
-    type: Sequelize.DATE,
-    field: 'confirmed_at'
+    type: Sequelize.DATE
   },
 
   profile: {
-    type: Sequelize.JSONB
+    type: Sequelize.JSONB,
+    defaultValue: {}
   }
 
 })
