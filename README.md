@@ -4,6 +4,13 @@
 
 Hackathon management system written in Node.js.
 
+## Running
+
+```bash
+$ npm install
+$ npm start
+```
+
 ## License
 
 ISC
