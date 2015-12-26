@@ -7,7 +7,7 @@ const User = require('../../../models/user')
 const validator = validate('request.body')(Joi.object().keys({
   email: Joi.string().email().required(),
   profile: Joi.object().required()
-}).unknown())
+}))
 
 const create = co.wrap(function *(ctx) {
   const user = yield User.create(ctx.request.body)
