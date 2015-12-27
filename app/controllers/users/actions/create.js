@@ -11,7 +11,9 @@ const validator = validate('request.body')(Joi.object().keys({
 
 const create = co.wrap(function *(ctx) {
   const user = yield User.create(ctx.request.body)
-  ctx.body = user
+  ctx.body = {
+    data: user
+  }
 })
 
 module.exports = compose([validator, create])
