@@ -8,7 +8,7 @@ describe('registration', () => {
   it('should create a user', function *() {
 
     const profile = {
-      answers: {
+      registration: {
         q1: true,
         q2: [1, 2, 3]
       }
