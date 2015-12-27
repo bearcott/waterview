@@ -15,7 +15,17 @@ const validator = validate('request.body')(Joi.object().keys({
 const create = co.wrap(function *(ctx) {
   const body = ctx.request.body
   body.confirmationToken = randomstring.generate()
-  const user = yield User.create(body)
+
+  try {
+    const user = yield User.create(body)
+  } catch (e) {
+    if (e.name !== 'SequelizeUniqueConstraintError') throw e
+    ctx.status = 400
+    ctx.body = {
+      message: 'Email already registered.'
+    }
+    return
+  }
 
   // TODO send confirmation email
 

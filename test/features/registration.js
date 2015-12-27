@@ -51,4 +51,18 @@ describe('registration', () => {
 
   })
 
+  it('should not allow duplicates', function *() {
+    const payload = {
+      email: 'bear@stearns.com',
+      profile: {
+        registration: {}
+      }
+    }
+    yield request.post('/users')
+      .send(payload).expect(200)
+    const err = yield request.post('/users')
+      .send(payload).expect(400)
+    expect(err.body.message).to.equal('Email already registered.')
+  })
+
 })
