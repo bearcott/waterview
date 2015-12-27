@@ -7,7 +7,12 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
 addons:
   postgresql: 9.4
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
 services:
   - postgresql
 env:
-  - DATABASE_URL=postgres://postgres@localhost/travis_ci_test
+  - DATABASE_URL=postgres://postgres@localhost/travis_ci_test CXX=g++-4.8
