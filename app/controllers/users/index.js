@@ -16,11 +16,11 @@ const routes = router => {
   const users = new Router()
 
   users.post('/', actions.create)
+  users.get('/confirm', actions.confirm)
+  users.post('/register', actions.register)
   users.get('/:id', actions.show)
   users.put('/:id', actions.update)
   users.patch('/:id', actions.update)
-  users.get('/confirm', actions.confirm)
-  users.post('/register', actions.register)
 
   router.use('/users', users.routes(), users.allowedMethods())
 }

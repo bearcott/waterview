@@ -14,6 +14,7 @@ describe('registration', () => {
       }
     }
 
+    // Create user
     const res = yield request.post('/users')
       .send({
         email: 'me@ian.pw',
@@ -23,6 +24,30 @@ describe('registration', () => {
     const body = res.body
     expect(body.data.email).to.equal('me@ian.pw')
     expect(body.data.profile).to.eql(profile)
+
+    // Find created user
+    const user = yield User.findById(body.data.id)
+    const token = user.confirmationToken
+
+    // Confirm user
+    const confirm = yield request.get('/users/confirm')
+      .query({
+        email: 'me@ian.pw',
+        confirmationToken: token
+      }).expect(200)
+    expect(confirm.body.valid).to.be.true
+
+    // Register user
+    const register = yield request.post('/users/register')
+      .send({
+        email: 'me@ian.pw',
+        confirmationToken: token,
+        password: 'password'
+      }).expect(200)
+    expect(register.body.success).to.be.true
+
+    yield user.reload()
+    expect(yield user.comparePassword('password')).to.be.true
 
   })
 

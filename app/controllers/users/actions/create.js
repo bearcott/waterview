@@ -1,5 +1,6 @@
 const co = require('co')
 const compose = require('koa-compose')
+const randomstring = require('randomstring')
 const validate = require('koa-joi-schema')
 const Joi = validate.Joi
 const User = require('../../../models/user')
@@ -12,7 +13,12 @@ const validator = validate('request.body')(Joi.object().keys({
 }))
 
 const create = co.wrap(function *(ctx) {
-  const user = yield User.create(ctx.request.body)
+  const body = ctx.request.body
+  body.confirmationToken = randomstring.generate()
+  const user = yield User.create(body)
+
+  // TODO send confirmation email
+
   ctx.body = {
     data: user
   }

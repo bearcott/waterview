@@ -2,6 +2,7 @@ const co = require('co')
 const compose = require('koa-compose')
 const validate = require('koa-joi-schema')
 const Joi = validate.Joi
+const User = require('../../../models/user')
 
 const validator = validate('request.body')(Joi.object().keys({
   email: Joi.string().email().required(),
