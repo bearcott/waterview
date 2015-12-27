@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node lib/app",
-    "test": "DATABASE_URL=postgres://localhost/waterview_test mocha -R spec"
+    "test": "NODE_ENV=test mocha -R spec"
   },
   "repository": {
     "type": "git",
