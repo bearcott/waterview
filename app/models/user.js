@@ -24,6 +24,12 @@ module.exports = database.define('user', {
     type: Sequelize.DATE
   },
 
+  role: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: 'hacker'
+  },
+
   profile: {
     type: Sequelize.JSONB,
     defaultValue: {}
