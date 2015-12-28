@@ -1,7 +1,7 @@
 const co = require('co')
 const compose = require('koa-compose')
 const validate = require('koa-joi-schema')
-const Joi = validate.Joi
+const Joi = require('joi')
 const User = require('../../../models/user')
 
 const validator = validate('request.body')(Joi.object().keys({

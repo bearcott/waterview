@@ -18,7 +18,7 @@ describe('error handler', () => {
   })
 
   it('should handle validation errors', function *() {
-    const e = { name: 'JoiValidationError' }
+    const e = { isJoi: true }
     const next = co.wrap(function *() {
       throw e
     })
