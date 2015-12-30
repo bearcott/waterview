@@ -6,7 +6,7 @@ const User = require('../../../app/models/user')
 
 describe('auth', () => {
 
-  it('should allow login with a valid token', function *() {
+  it('should allow login with valid credentials', function *() {
 
     const email = 'ian@awesome.com'
     const password = 'testa'
@@ -30,6 +30,19 @@ describe('auth', () => {
 
     expect(decoded.email).to.equal(email)
     expect(decoded.id).to.equal(user.id)
+
+  })
+
+
+  it('should not allow login with invalid credentials', function *() {
+
+    const result = yield request.post('/auth/login')
+      .send({
+        email: 'dne',
+        password: 'youstupid'
+      }).expect(401)
+
+    expect(result.body.error).to.match(/Invalid username/)
 
   })
 
