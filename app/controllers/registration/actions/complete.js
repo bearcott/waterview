@@ -10,7 +10,7 @@ const validator = validate('request.body')(Joi.object().keys({
   password: Joi.string().required()
 }))
 
-const register = co.wrap(function *(ctx) {
+const complete = co.wrap(function *(ctx) {
   const body = ctx.request.body
   const user = yield User.find({
     email: body.email,
@@ -31,4 +31,4 @@ const register = co.wrap(function *(ctx) {
   }
 })
 
-module.exports = compose([validator, register])
+module.exports = compose([validator, complete])

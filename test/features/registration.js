@@ -15,7 +15,7 @@ describe('registration', () => {
     }
 
     // Create user
-    const res = yield request.post('/users')
+    const res = yield request.post('/registration/create')
       .send({
         email: 'me@ian.pw',
         profile: profile
@@ -30,15 +30,15 @@ describe('registration', () => {
     const token = user.confirmationToken
 
     // Confirm user
-    const confirm = yield request.get('/users/confirm')
+    const confirm = yield request.get('/registration/confirm')
       .query({
         email: 'me@ian.pw',
         confirmationToken: token
       }).expect(200)
     expect(confirm.body.valid).to.be.true
 
-    // Register user
-    const register = yield request.post('/users/register')
+    // Complete registration
+    const register = yield request.post('/registration/complete')
       .send({
         email: 'me@ian.pw',
         confirmationToken: token,
@@ -58,9 +58,9 @@ describe('registration', () => {
         registration: {}
       }
     }
-    yield request.post('/users')
+    yield request.post('/registration/create')
       .send(payload).expect(200)
-    const err = yield request.post('/users')
+    const err = yield request.post('/registration/create')
       .send(payload).expect(400)
     expect(err.body.message).to.equal('Email already registered.')
   })
