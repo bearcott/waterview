@@ -66,4 +66,14 @@ describe('auth', () => {
 
   })
 
+  it('should not refresh an invalid token', function *() {
+
+    const refresh = yield request.post('/auth/refresh')
+      .set({ 'Authorization': 'Bearer ayylmao' })
+      .expect(401)
+
+    expect(refresh.body.error).to.match(/Protected resource/)
+
+  })
+
 })
