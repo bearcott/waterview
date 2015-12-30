@@ -12,9 +12,11 @@ const validator = validate('request.body')(Joi.object().keys({
 
 const complete = co.wrap(function *(ctx) {
   const body = ctx.request.body
-  const user = yield User.find({
-    email: body.email,
-    confirmatonToken: body.confirmationToken
+  const user = yield User.findOne({
+    where: {
+      email: body.email,
+      confirmationToken: body.confirmationToken
+    }
   })
   if (!user) {
     ctx.status = 400

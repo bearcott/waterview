@@ -22,7 +22,7 @@ module.exports = co.wrap(function *(ctx) {
     id: user.id,
     email: user.email,
     role: user.role
-  }, process.env.SECRET || 'test', {
+  }, process.env.SESSION_SECRET || 'test', {
     expiresInMinutes: 60 * 24
   })
   ctx.body = {

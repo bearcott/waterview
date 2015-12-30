@@ -40,7 +40,7 @@ module.exports = database.define('user', {
   instanceMethods: {
 
     comparePassword: function (password) {
-      if (typeof this.password === 'undefined') return Promise.resolve(false)
+      if (typeof this.password === 'undefined' || this.password === null) return Promise.resolve(false)
       return promisify(bcrypt.compare)(password, this.password)
     },
 
