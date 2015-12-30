@@ -1,5 +1,6 @@
 const co = require('co')
 const jwt = require('koa-jwt')
+const constants = require('../../../../lib/constants')
 const User = require('../../../models/user')
 
 module.exports = co.wrap(function *(ctx) {
@@ -22,8 +23,8 @@ module.exports = co.wrap(function *(ctx) {
     id: user.id,
     email: user.email,
     role: user.role
-  }, process.env.SESSION_SECRET || 'test', {
-    expiresInMinutes: 60 * 24
+  }, constants.SESSION_SECRET, {
+    expiresInMinutes: constants.SESSION_EXPIRY
   })
   ctx.body = {
     token: token
