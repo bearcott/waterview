@@ -1,7 +1,7 @@
 const expect = require('chai').expect
-const app = require('../../lib/app')
+const app = require('../../../lib/app')
 const request = require('supertest-as-promised').agent(app.listen())
-const User = require('../../app/models/user')
+const User = require('../../../app/models/user')
 
 describe('registration', () => {
 
