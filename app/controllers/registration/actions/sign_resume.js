@@ -18,9 +18,9 @@ module.exports = co.wrap(function *(ctx) {
     return
   }
 
-  res.json({
+  ctx.body = {
     signedUrl: signedUrl,
     publicUrl: '/s3/uploads/' + filename,
     filename: filename
-  });
+  }
 })
