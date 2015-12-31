@@ -1,10 +1,6 @@
-const aws = require('aws-sdk')
 const co = require('co')
-const constants = require('../../../../lib/constants')
-const promisify = require('es6-promisify')
 const uuid = require('node-uuid')
-
-const s3 = new aws.S3()
+const s3 = require('../../../../lib/util/s3')
 
 module.exports = co.wrap(function *(ctx) {
   const query = ctx.request.query
@@ -12,17 +8,8 @@ module.exports = co.wrap(function *(ctx) {
   const mimeType = query.contentType
   const fileKey = `/resumes/${filename}`
 
-  const params = {
-    Bucket: constants.AWS_RESUME_BUCKET,
-    Key: fileKey,
-    Expires: 60,
-    ContentType: mimeType,
-    ACL: 'private'
-  }
-
-  const getSignedUrl = promisify(s3.getSignedUrl.bind(s3))
   try {
-    const signedUrl = yield getSignedUrl('putObject', params)
+    const signedUrl = yield s3.signedPutUrl(fileKey, mimeType)
   } catch (e) {
     ctx.status = 500
     ctx.body = {
@@ -32,7 +19,7 @@ module.exports = co.wrap(function *(ctx) {
   }
 
   res.json({
-    signedUrl: data,
+    signedUrl: signedUrl,
     publicUrl: '/s3/uploads/' + filename,
     filename: filename
   });
