@@ -2,6 +2,7 @@ const co = require('co')
 const compose = require('koa-compose')
 const randomstring = require('randomstring')
 const validate = require('koa-joi-schema')
+const emails = require('../../../../lib/util/emails')
 const Joi = require('joi')
 const User = require('../../../models/user')
 
@@ -27,7 +28,16 @@ const create = co.wrap(function *(ctx) {
     return
   }
 
-  // TODO send confirmation email
+  yield emails.sendEmail({
+    to: user.email,
+    from: 'confirm',
+    fromname: 'HackDFW Team',
+    subject: '[ACTION REQUIRED] Confirm your registration for HackDFW',
+    text: 'Hey there!\n\n'
+      + 'Thanks for registering for HackDFW. To complete your registration, please follow the link below:\n\n'
+      + '<register link>\n\n'
+      + 'Regards,\n\nThe HackDFW Team'
+  })
 
   ctx.body = {
     data: user
