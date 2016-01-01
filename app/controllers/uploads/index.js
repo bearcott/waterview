@@ -5,7 +5,7 @@ const actions = {
 const Router = require('koa-router')
 
 const routes = router => {
-  router.get(/\/uploads\/(.*)/, actions.index)
+  router.get(/^\/uploads\/(.*)/, actions.index)
 }
 
 module.exports = {
