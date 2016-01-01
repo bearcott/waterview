@@ -9,7 +9,7 @@ module.exports = co.wrap(function *(ctx) {
   const key = 'resumes/' + filename
 
   try {
-    const signedUrl = yield s3.signedPutUrl(file, mimeType)
+    const signedUrl = yield s3.signedPutUrl(key, mimeType)
   } catch (e) {
     ctx.status = 500
     ctx.body = {
