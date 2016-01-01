@@ -25,6 +25,7 @@ const complete = co.wrap(function *(ctx) {
     }
     return
   }
+  user.confirmationToken = null
   user.confirmedAt = new Date()
   yield user.setPassword(body.password)
   yield user.save()
