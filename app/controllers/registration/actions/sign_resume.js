@@ -6,7 +6,7 @@ module.exports = co.wrap(function *(ctx) {
   const query = ctx.request.query
   const filename = uuid.v4() + '_' + query.objectName
   const mimeType = query.contentType
-  const file = filename
+  const key = 'resumes/' + filename
 
   try {
     const signedUrl = yield s3.signedPutUrl(file, mimeType)
@@ -20,7 +20,6 @@ module.exports = co.wrap(function *(ctx) {
 
   ctx.body = {
     signedUrl: signedUrl,
-    publicUrl: '/s3/uploads/' + filename,
-    filename: filename
+		key: key
   }
 })
