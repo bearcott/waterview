@@ -11,7 +11,14 @@ $ npm install
 $ npm start
 ```
 
+make sure you have postgres installed and working before doing the following:
+
+```
+$ node tasks/*
+```
+
 ## License
 
 ISC
+
 
